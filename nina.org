@@ -173,15 +173,6 @@ First mark the word, then add more cursors.
 To get out of multiple-cursors-mode, press <return> or C-g.
 The latter will first disable multiple regions before disabling multiple cursors. If you want to insert a newline in multiple-cursors-mode, use C-j.
 
-** golden
-When working with many windows at the same time, each window has a size that is not convenient for editing.
-golden-ratio helps on this issue by resizing automatically the windows you are working on to the size specified in the "Golden Ratio".
-#+begin_src emacs-lisp
-  (straight-use-package 'golden-ratio)
-  (require 'golden-ratio)
-    (golden-ratio-mode 1)
-#+end_src
-
 * Programming
 
 ** Parentheses
