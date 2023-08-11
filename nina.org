@@ -80,6 +80,7 @@ Also useful if I forget who I am
   (setq user-full-name "Nina DePalma"
         user-mail-address "ninadepalma@gmail.com")
 #+end_src
+
 ** recentf
 Set keybinding for recentf
 #+begin_src emacs-lisp
@@ -100,13 +101,6 @@ Keep backup and temporary files in a temporary file directory
 ** Prompt me for 'y/n' instead of 'yes/no'
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
-** golden
-/When working with many windows at the same time, each window has a size that is not convenient for editing. golden-ratio helps on this issue by resizing automatically the windows you are working on to the size specified in the "Golden Ratio"./
-#+begin_src emacs-lisp
-;;  (require 'golden-ratio)
-;;  (golden-ratio-mode 1)
 #+end_src
 
 * Package management
@@ -130,7 +124,7 @@ Keep backup and temporary files in a temporary file directory
 ** But I also install use-package as well
 #+begin_src emacs-lisp
   (straight-use-package 'use-package)
-  (setq straight-use-package-by-default t)
+  ;;(setq straight-use-package-by-default t)
 #+end_src
 
 ** Minimal package.el config for package archives
@@ -153,6 +147,39 @@ Set the theme to 'modus operandi tinted'. Add a gray background to org mode code
   (load-theme 'modus-operandi)
 
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+#+end_src
+
+* Formatting
+
+** multiple cursors
+#+begin_src emacs-lisp
+  (straight-use-package 'multiple-cursors)
+  (require 'multiple-cursors)
+#+end_src
+
+When you have an active region that spans multiple lines, the following will add a cursor to each line:
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+#+end_src
+
+When you want to add multiple cursors not based on continuous lines, but based on keywords in the buffer, use:
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+#+end_src
+
+First mark the word, then add more cursors.
+To get out of multiple-cursors-mode, press <return> or C-g.
+The latter will first disable multiple regions before disabling multiple cursors. If you want to insert a newline in multiple-cursors-mode, use C-j.
+
+** golden
+When working with many windows at the same time, each window has a size that is not convenient for editing.
+golden-ratio helps on this issue by resizing automatically the windows you are working on to the size specified in the "Golden Ratio".
+#+begin_src emacs-lisp
+  (straight-use-package 'golden-ratio)
+  (require 'golden-ratio)
+    (golden-ratio-mode 1)
 #+end_src
 
 * Programming
@@ -242,7 +269,7 @@ Generate pylint rc file as needed with =pylint --generate-rcfile > path\.pylintr
 * Org mode
 I use org mode to keep a running task list for work
 #+begin_src emacs-lisp
-  (straight-use-package 'org)
+  (use-package org)
   (require 'org)
 #+end_src
 
@@ -254,9 +281,13 @@ Because I use org mode for work, I have a sequence for the stages of my developm
 	(sequence "DEV" "TEST" "PROD" "DONE")))
 #+end_src
 
-/Look into what this is actually doing/
+Log time when task marked as done
 #+begin_src emacs-lisp
   (setq org-log-done t)
+#+end_src
+
+#+begin_src emacs-lisp
+  ;;(setq org-archive-location "~/org/work/dash_archive.org::")
 #+end_src
 
 org mode docs says:
@@ -272,11 +303,11 @@ accessible anywhere in Emacs
 Use these to create org tasks anywhere in emacs and send them to the master task file
 #+begin_src emacs-lisp
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline "~/org/wm.org" "========================= Unsorted TODOs =========================")
+        '(("t" "Todo" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
            "* TODO %?")
-  	("l" "Todo with link" entry (file+headline "~/org/wm.org" "========================= Unsorted TODOs =========================")
+  	("l" "Todo with link" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
   	 "* TODO %?\n  %i\n %a\n")
-          ("j" "Journal" entry (file+datetree "~/org/journal.org")
+          ("j" "Journal" entry (file+datetree "~/org/life/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
 #+end_src
 
@@ -331,7 +362,7 @@ Eventually I think I should move this to a separate file
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(org-agenda-files '("c:/Users/ndepalma/org/wm.org"))
+   '(org-agenda-files '("c:/Users/ndepalma/org/work/dash.org"))
    '(package-selected-packages '(org-books go-translate elpy use-package)))
 
   (custom-set-faces
