@@ -11,11 +11,6 @@ This file contains my emacs config in a *literate style* with org-babel-mode.
   (setq inhibit-splash-screen 0)
 #+end_src
 
-** Enable transient mark mode
-#+begin_src emacs-lisp
-  (transient-mark-mode 1)
-#+end_src
-
 ** Remove the scroll bar
 #+begin_src emacs-lisp
   (add-to-list 'default-frame-alist
@@ -25,6 +20,11 @@ This file contains my emacs config in a *literate style* with org-babel-mode.
 ** And remove the tool bar
 #+begin_src emacs-lisp
   (tool-bar-mode -1)
+#+end_src
+
+** Enable transient mark mode
+#+begin_src emacs-lisp
+  (transient-mark-mode 1)
 #+end_src
 
 ** Make emacs always full screen
@@ -149,7 +149,7 @@ Set the theme to 'modus operandi tinted'. Add a gray background to org mode code
           (fg-mode-line-active fg-main)
           (border-mode-line-active blue-intense)))
 
-  (load-theme 'modus-operandi)
+  (load-theme 'modus-operandi t)
 
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 #+end_src
@@ -317,7 +317,6 @@ Use these to create org tasks anywhere in emacs and send them to the master task
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   (setq org-hide-leading-stars t)
 #+end_src
-
 
 * go-translate
 #+begin_src emacs-lisp
