@@ -143,7 +143,12 @@ Set the theme to 'modus operandi tinted'. Add a gray background to org mode code
     :config
 
   (setq modus-themes-org-blocks 'gray-background)
-  
+
+  (setq modus-themes-common-palette-overrides
+        '((bg-mode-line-active bg-blue-intense)
+          (fg-mode-line-active fg-main)
+          (border-mode-line-active blue-intense)))
+
   (load-theme 'modus-operandi)
 
   (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
@@ -312,6 +317,7 @@ Use these to create org tasks anywhere in emacs and send them to the master task
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   (setq org-hide-leading-stars t)
 #+end_src
+
 
 * go-translate
 #+begin_src emacs-lisp
