@@ -223,9 +223,6 @@ I use org mode to keep a running task list for work
 #+begin_src emacs-lisp :tangle init.el
     (use-package org
       :straight t
-      :hook
-      (org-mode . (lambda () (progn
-			       (add-hook 'after-save-hook #'org-babel-tangle))))
 #+end_src
 
 ** look and feel
@@ -247,7 +244,7 @@ I use org mode to keep a running task list for work
   ;; global todo statuses
   (setq org-todo-keywords
        '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "REMOVED")
-	 (sequence "DEV" "TEST" "PROD" "DONE"))) ; I use org for work
+  	 (sequence "DEV" "TEST" "PROD" "DONE"))) ; I use org for work
 
   (setq org-log-done t) ; log time when task marked done
 
@@ -258,12 +255,23 @@ I use org mode to keep a running task list for work
 
   ;; capture templates
   (setq org-capture-templates
-	'(("t" "Todo" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
-	   "* TODO %?")
-	("l" "Todo with link" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
-	 "* TODO %?\n  %i\n %a\n")
-	  ("j" "Journal" entry (file+datetree "~/org/life/journal.org")
-	   "* %?\nEntered on %U\n  %i\n  %a")))
+  	'(("t" "Todo" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
+  	   "* TODO %?")
+  	("l" "Todo with link" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
+  	 "* TODO %?\n  %i\n %a\n")
+  	  ("j" "Journal" entry (file+datetree "~/org/life/journal.org")
+  	   "* %?\nEntered on %U\n  %i\n  %a")))
+
+  ;; automatically tangle files when saved; keeps init.el up to date
+  ;; ty https://systemcrafters.net/emacs-from-scratch/configure-everything-with-org-babel/
+  (defun org-babel-tangle-config ()
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name "~/.emacs.d/nina.org"))
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle)))
+
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
+
 #+end_src
 
 * go-translate

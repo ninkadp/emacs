@@ -145,9 +145,6 @@
 
 (use-package org
   :straight t
-  :hook
-  (org-mode . (lambda () (progn
-			       (add-hook 'after-save-hook #'org-babel-tangle))))
 
 (setq org-ellipsis " ↴") ; change fold/unfold symbol
 
@@ -178,6 +175,16 @@
 	 "* TODO %?\n  %i\n %a\n")
 	  ("j" "Journal" entry (file+datetree "~/org/life/journal.org")
 	   "* %?\nEntered on %U\n  %i\n  %a")))
+
+;; automatically tangle files when saved; keeps init.el up to date
+;; ty https://systemcrafters.net/emacs-from-scratch/configure-everything-with-org-babel/
+(defun org-babel-tangle-config ()
+(when (string-equal (buffer-file-name)
+                    (expand-file-name "~/.emacs.d/nina.org"))
+  (let ((org-confirm-babel-evaluate nil))
+    (org-babel-tangle)))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
 
 (straight-use-package 'go-translate)
 
