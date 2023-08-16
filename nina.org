@@ -115,6 +115,9 @@ Also useful if I forget who I am
      ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
   )
 
+  (set-face-attribute 'mode-line nil :background "SlateGray1")
+  (set-face-attribute 'mode-line-inactive nil :background "grey93")
+
     ;;;; below are my preferences for 'modus operandi tinted'
     ;; (use-package modus-themes
     ;;   :straight t
