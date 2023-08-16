@@ -309,9 +309,10 @@ Helm
 #+end_src
 
 * next...
-** TODO tangle org config to multiple files
-** TODO see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
-** TODO make this file repo's README
+** DONE tangle org config to multiple files
+CLOSED: [2023-08-16 Wed 14:01]
+** DONE see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
+CLOSED: [2023-08-16 Wed 14:01]
 ** TODO finish picking through R's config
 ** TODO numbers only in coding modes
 ** TODO writing setup
