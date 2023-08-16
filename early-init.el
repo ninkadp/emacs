@@ -6,4 +6,3 @@
 ;; to their early init-file to prevent package.el loading packages prior to their init-file loading.
 
 (provide 'early-init)
-

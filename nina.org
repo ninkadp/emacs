@@ -4,10 +4,21 @@
 
 This file contains my emacs config in a *literate style* with org-babel-mode.
 
+* early-init.el
+#+begin_src emacs-lisp :tangle early-init.el
+  ;; https://github.com/radian-software/straight.el#getting-started
+  ;; Users of Emacs versions >= 27 will want to add:
+
+  (setq package-enable-at-startup nil)
+
+  ;; to their early init-file to prevent package.el loading packages prior to their init-file loading.
+
+  (provide 'early-init)
+#+end_src
 * Package management
 Use straight.el, but install use-package as well
 Includes minimal package.el config for package archives
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (defvar bootstrap-version)
   (let ((bootstrap-file
 	(expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -32,7 +43,7 @@ Includes minimal package.el config for package archives
 
 * Basics
 ** Look and feel
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
   (tool-bar-mode -1)   ; no tool bar with icons
   (scroll-bar-mode -1) ; no scroll bars
@@ -60,7 +71,7 @@ Includes minimal package.el config for package archives
 #+end_src
 
 ** Behavior
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (global-auto-revert-mode t)   ; update buffers automatically when underlying files are changed externally
 
   (fset 'yes-or-no-p 'y-or-n-p) ; prompt me for 'y/n' instead of 'yes/no'
@@ -74,18 +85,18 @@ Includes minimal package.el config for package archives
 #+end_src
 
 ** multiple cursors
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (straight-use-package 'multiple-cursors)
   (require 'multiple-cursors)
 #+end_src
 
 When you have an active region that spans multiple lines, the following will add a cursor to each line:
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 #+end_src
 
 When you want to add multiple cursors not based on continuous lines, but based on keywords in the buffer, use:
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
@@ -97,13 +108,13 @@ The latter will first disable multiple regions before disabling multiple cursors
 
 ** Personal emacs-wide variables
 Also useful if I forget who I am
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (setq user-full-name "Nina DePalma"
         user-mail-address "ninadepalma@gmail.com")
 #+end_src
 
 * Theme
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (load-theme 'tsdh-light)
 
   (custom-set-faces
@@ -138,7 +149,7 @@ Also useful if I forget who I am
 * Programming
 ** Parentheses
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (use-package smartparens
     :straight t
     :config
@@ -151,7 +162,7 @@ Also useful if I forget who I am
 ** Indentation
 =aggressive-indent-mode= is a minor mode that keeps your code always indented.
 It reindents after every change
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (use-package aggressive-indent
     :straight t
     :config
@@ -160,7 +171,7 @@ It reindents after every change
 ** Python
 Review each part of this...
 *** elpy
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (setq python-shell-interpreter "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe")
 
   ;; Elpy is an extension for the Emacs text editor to work with Python projects
@@ -175,7 +186,7 @@ Review each part of this...
 #+end_src
 
 *** flycheck
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (use-package flycheck
     :straight t
     :init (global-flycheck-mode))
@@ -192,7 +203,7 @@ Review each part of this...
 *** pylint
 Find pylint using =where pylint=
 Generate pylint rc file as needed with =pylint --generate-rcfile > path\.pylintrc=
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (add-hook 'python-mode-hook
   	  (lambda ()
   	    (setq flycheck-python-pylint-executable "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\pylint.exe")
@@ -200,7 +211,7 @@ Generate pylint rc file as needed with =pylint --generate-rcfile > path\.pylintr
 #+end_src
 ** magit
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (use-package magit
     :straight t
     :bind
@@ -230,7 +241,7 @@ I use org mode to keep a running task list for work
 
 ** behavior
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   ;; global todo statuses
   (setq org-todo-keywords
        '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "REMOVED")
@@ -254,7 +265,7 @@ I use org mode to keep a running task list for work
 #+end_src
 
 * go-translate
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (straight-use-package 'go-translate)
 
   (setq gts-translate-list '(("en" "de") ("en" "hu") ("en" "ru")))
@@ -262,7 +273,7 @@ I use org mode to keep a running task list for work
 
 * completion
 Helm
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (straight-use-package 'helm)
 
   (global-set-key (kbd "C-c h") 'helm-mini)
@@ -272,12 +283,12 @@ Helm
 #+end_src
 
 * nov.el
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (straight-use-package 'nov)
 #+end_src
 
 * 'custom'
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
