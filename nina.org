@@ -177,12 +177,11 @@ Review each part of this...
   ;; Elpy is an extension for the Emacs text editor to work with Python projects
   ;; need to use straight.el instead.............
   (use-package elpy
-    :init
-  (elpy-enable))
+    :straight t)
 
   (add-hook 'elpy-mode-hook (lambda ()
-                              (add-hook 'before-save-hook
-                                        'elpy-format-code nil t))) ; auto-format on close
+			      (add-hook 'before-save-hook
+					'elpy-format-code nil t))) ; auto-format on close
 #+end_src
 
 *** flycheck
@@ -226,7 +225,7 @@ I use org mode to keep a running task list for work
       :straight t
       :hook
       (org-mode . (lambda () (progn
-			       (add-hook 'after-save-hook #'org-babel-tangle :append :local))))
+			       (add-hook 'after-save-hook #'org-babel-tangle))))
 #+end_src
 
 ** look and feel

@@ -1,14 +1,14 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
-      (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
+	(expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+	(bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-	(url-retrieve-synchronously
-	"https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
+	  (url-retrieve-synchronously
+	  "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	  'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
 (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
@@ -16,8 +16,8 @@
 
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org"   . "https://orgmode.org/elpa/")
-			 ("elpa"  . "https://elpa.gnu.org/packages/")))
+			   ("org"   . "https://orgmode.org/elpa/")
+			   ("elpa"  . "https://elpa.gnu.org/packages/")))
 
 (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
 (tool-bar-mode -1)   ; no tool bar with icons
@@ -114,29 +114,28 @@
 ;; Elpy is an extension for the Emacs text editor to work with Python projects
 ;; need to use straight.el instead.............
 (use-package elpy
-  :init
-(elpy-enable))
+  :straight t)
 
 (add-hook 'elpy-mode-hook (lambda ()
-                            (add-hook 'before-save-hook
-                                      'elpy-format-code nil t))) ; auto-format on close
+			      (add-hook 'before-save-hook
+					'elpy-format-code nil t))) ; auto-format on close
 
 (use-package flycheck
   :straight t
   :init (global-flycheck-mode))
 
 (setq elpy-modules (quote (elpy-module-company ; select elpy modules we want (this disables flymake)
-			    elpy-module-eldoc
-			    elpy-module-pyvenv
-			    elpy-module-yasnippet
-			    elpy-module-sane-defaults)))
+			      elpy-module-eldoc
+			      elpy-module-pyvenv
+			      elpy-module-yasnippet
+			      elpy-module-sane-defaults)))
 
 (add-hook 'after-init-hook #'global-flycheck-mode) ; permanently enable syntax checking with Flycheck
 
 (add-hook 'python-mode-hook
-  	(lambda ()
-  	  (setq flycheck-python-pylint-executable "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\pylint.exe")
-  	  (setq flycheck-pylintrc (substitute-in-file-name "C:\\Users\\ndepalma\\.pylintrc"))))
+	  (lambda ()
+	    (setq flycheck-python-pylint-executable "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\pylint.exe")
+	    (setq flycheck-pylintrc (substitute-in-file-name "C:\\Users\\ndepalma\\.pylintrc"))))
 
 (use-package magit
   :straight t
@@ -144,8 +143,11 @@
   (("C-c g"     . 'magit-status)
    ("C-c C-p"   . 'magit-push)))
 
-(use-package org)
-(require 'org)
+(use-package org
+  :straight t
+  :hook
+  (org-mode . (lambda () (progn
+			       (add-hook 'after-save-hook #'org-babel-tangle))))
 
 (setq org-ellipsis " ↴") ; change fold/unfold symbol
 
@@ -159,7 +161,7 @@
 ;; global todo statuses
 (setq org-todo-keywords
      '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "REMOVED")
-       (sequence "DEV" "TEST" "PROD" "DONE"))) ; I use org for work
+	 (sequence "DEV" "TEST" "PROD" "DONE"))) ; I use org for work
 
 (setq org-log-done t) ; log time when task marked done
 
@@ -170,12 +172,12 @@
 
 ;; capture templates
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
-	 "* TODO %?")
-      ("l" "Todo with link" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
-       "* TODO %?\n  %i\n %a\n")
-	("j" "Journal" entry (file+datetree "~/org/life/journal.org")
-	 "* %?\nEntered on %U\n  %i\n  %a")))
+	'(("t" "Todo" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
+	   "* TODO %?")
+	("l" "Todo with link" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
+	 "* TODO %?\n  %i\n %a\n")
+	  ("j" "Journal" entry (file+datetree "~/org/life/journal.org")
+	   "* %?\nEntered on %U\n  %i\n  %a")))
 
 (straight-use-package 'go-translate)
 
