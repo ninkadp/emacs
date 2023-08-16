@@ -297,6 +297,7 @@ Helm
 * next...
 ** TODO tangle org config to multiple files
 ** TODO see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
+** TODO make this file repo's README
 ** TODO finish picking through R's config
 ** TODO numbers only in coding modes
 ** TODO writing setup
