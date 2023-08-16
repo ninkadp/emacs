@@ -309,12 +309,10 @@ Helm
 #+end_src
 
 * next...
-** DONE tangle org config to multiple files
-CLOSED: [2023-08-16 Wed 14:01]
-** DONE see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
-CLOSED: [2023-08-16 Wed 14:01]
-** TODO finish picking through R's config
-** TODO numbers only in coding modes
-** TODO writing setup
-** TODO git gutter
-** TODO all-the-icons?
+- [X] tangle org config to multiple files
+- [X] see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
+- [ ] finish picking through R's config
+- [ ] numbers only in coding modes
+- [ ] writing setup
+- [ ] git gutter
+- [ ] all-the-icons?
