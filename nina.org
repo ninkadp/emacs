@@ -221,14 +221,17 @@ Generate pylint rc file as needed with =pylint --generate-rcfile > path\.pylintr
 
 * Org mode
 I use org mode to keep a running task list for work
-#+begin_src emacs-lisp
-  (use-package org)
-  (require 'org)
+#+begin_src emacs-lisp :tangle init.el
+    (use-package org
+      :straight t
+      :hook
+      (org-mode . (lambda () (progn
+			       (add-hook 'after-save-hook #'org-babel-tangle :append :local))))
 #+end_src
 
 ** look and feel
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle init.el
   (setq org-ellipsis " ↴") ; change fold/unfold symbol
 
   (use-package org-bullets ; nicer org bullets
