@@ -182,6 +182,7 @@ It reindents after every change
   			      (add-hook 'before-save-hook
   					'elpy-format-code nil t))) ; auto-format on close
 
+  (elpy-enable)
 #+end_src
 
 *** flycheck

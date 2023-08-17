@@ -112,13 +112,14 @@
 (setq python-shell-interpreter "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe")
 
 ;; Elpy is an extension for the Emacs text editor to work with Python projects
-;; need to use straight.el instead.............
 (use-package elpy
   :straight t)
 
 (add-hook 'elpy-mode-hook (lambda ()
 			      (add-hook 'before-save-hook
 					'elpy-format-code nil t))) ; auto-format on close
+
+(elpy-enable)
 
 (use-package flycheck
   :straight t
