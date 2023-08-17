@@ -38,8 +38,8 @@
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
 
-(global-hl-line-mode 1) ; highlight current row
 (global-hi-lock-mode 1) ; highlights text that matches regular expressions
+(global-hl-line-mode 1) ; highlight current row
 
 (set-frame-font "Hack 9" nil t)
 
@@ -150,7 +150,7 @@
    ("C-c C-p"   . 'magit-push)))
 
 (use-package org
-  :straight t
+  :straight t)
 
 (setq org-ellipsis " ↴") ; change fold/unfold symbol
 
@@ -188,7 +188,7 @@
 (when (string-equal (buffer-file-name)
                     (expand-file-name "~/.emacs.d/nina.org"))
   (let ((org-confirm-babel-evaluate nil))
-    (org-babel-tangle)))
+    (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
 
