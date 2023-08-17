@@ -169,19 +169,19 @@ It reindents after every change
     (global-aggressive-indent-mode t))
 #+end_src
 ** Python
-Review each part of this...
+
 *** elpy
 #+begin_src emacs-lisp :tangle init.el
   (setq python-shell-interpreter "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\python.exe")
 
   ;; Elpy is an extension for the Emacs text editor to work with Python projects
-  ;; need to use straight.el instead.............
   (use-package elpy
     :straight t)
 
   (add-hook 'elpy-mode-hook (lambda ()
-			      (add-hook 'before-save-hook
-					'elpy-format-code nil t))) ; auto-format on close
+  			      (add-hook 'before-save-hook
+  					'elpy-format-code nil t))) ; auto-format on close
+
 #+end_src
 
 *** flycheck
