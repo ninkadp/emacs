@@ -137,6 +137,12 @@
 	    (setq flycheck-python-pylint-executable "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\pylint.exe")
 	    (setq flycheck-pylintrc (substitute-in-file-name "C:\\Users\\ndepalma\\.pylintrc"))))
 
+(straight-use-package 'yaml-mode)
+
+(add-hook 'yaml-mode-hook
+  '(lambda ()
+    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
 (use-package magit
   :straight t
   :bind
