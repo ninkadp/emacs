@@ -218,7 +218,7 @@ From the docs:
 /Unlike python-mode, this mode follows the Emacs convention of not binding the ENTER key to `newline-and-indent'. To get this behavior, add the key definition to `yaml-mode-hook':/
 #+begin_src emacs-lisp :tangle init.el
   (add-hook 'yaml-mode-hook
-    '(lambda ()
+    #'(lambda ()
       (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 #+end_src
 ** magit
