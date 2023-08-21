@@ -82,6 +82,9 @@ Includes minimal package.el config for package archives
     (setq-default save-place t))
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespaces
+
+  (setq default-directory "~/")
+  (setq command-line-default-directory "~/")
 #+end_src
 
 ** multiple cursors
