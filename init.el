@@ -72,7 +72,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 (when (string= (system-name) work-comp)
-  (load-theme 'tsdh-light) ; i prefer light mode in the (bright) office (during the day)...
+  (load-theme 'tsdh-light)
 
   (set-face-attribute 'mode-line nil :background "SlateGray1")
   (set-face-attribute 'mode-line-inactive nil :background "grey93")
@@ -88,8 +88,8 @@
   )
 
 (when (string= (system-name) home-comp)
-  (load-theme 'tsdh-dark))  ; ...and dark mode at home
-  ;; preferences tbd...
+  (load-theme 'tsdh-dark))
+;; preferences tbd...
 
 ;;;; below are my preferences for 'modus operandi tinted'
 ;; (use-package modus-themes
