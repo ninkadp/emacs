@@ -59,6 +59,9 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespaces
 
+(setq default-directory "~/")
+(setq command-line-default-directory "~/")
+
 (straight-use-package 'multiple-cursors)
 (require 'multiple-cursors)
 
