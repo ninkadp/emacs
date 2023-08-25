@@ -19,6 +19,11 @@
 			   ("org"   . "https://orgmode.org/elpa/")
 			   ("elpa"  . "https://elpa.gnu.org/packages/")))
 
+(setq user-full-name "Nina DePalma"
+      user-mail-address "ninadepalma@gmail.com"
+	work-comp "WIN-HS95ZD3"
+	home-comp "IDK-YET")
+
 (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
 (tool-bar-mode -1)   ; no tool bar with icons
 (scroll-bar-mode -1) ; no scroll bars
@@ -63,38 +68,41 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-(setq user-full-name "Nina DePalma"
-      user-mail-address "ninadepalma@gmail.com")
+(when (string= (system-name) work-comp)
+  (load-theme 'tsdh-light) ; i prefer light mode in the (bright) office (during the day)...
 
-(load-theme 'tsdh-light)
+  (set-face-attribute 'mode-line nil :background "SlateGray1")
+  (set-face-attribute 'mode-line-inactive nil :background "grey93")
 
-(custom-set-faces
- '(org-block-begin-line
-   ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
- '(org-block
-   ((t (:background "#EFF0F1" :extend t))))
- '(org-block-end-line
-   ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
-)
+  (custom-set-faces
+   '(org-block-begin-line
+      ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
+       '(org-block
+         ((t (:background "#EFF0F1" :extend t))))
+       '(org-block-end-line
+         ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
+   )
+  )
 
-(set-face-attribute 'mode-line nil :background "SlateGray1")
-(set-face-attribute 'mode-line-inactive nil :background "grey93")
+(when (string= (system-name) home-comp)
+  (load-theme 'tsdh-dark))  ; ...and dark mode at home
+  ;; preferences tbd...
 
-  ;;;; below are my preferences for 'modus operandi tinted'
-  ;; (use-package modus-themes
-  ;;   :straight t
-  ;;   :config
+;;;; below are my preferences for 'modus operandi tinted'
+;; (use-package modus-themes
+;;   :straight t
+;;   :config
 
-  ;; (setq modus-themes-org-blocks 'gray-background) ; helps code blocks stand out
+;; (setq modus-themes-org-blocks 'gray-background) ; helps code blocks stand out
 
-  ;; (setq modus-themes-common-palette-overrides
-  ;;       '((bg-mode-line-active bg-blue-intense) ; colorful mode line
-  ;;         (fg-mode-line-active fg-main)
-  ;;         (border-mode-line-active blue-intense)))
+;; (setq modus-themes-common-palette-overrides
+;;       '((bg-mode-line-active bg-blue-intense) ; colorful mode line
+;;         (fg-mode-line-active fg-main)
+;;         (border-mode-line-active blue-intense)))
 
-  ;; (load-theme 'modus-operandi t)
+;; (load-theme 'modus-operandi t)
 
-  ;; (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+;; (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 
 (use-package smartparens
   :straight t

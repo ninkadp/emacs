@@ -42,6 +42,16 @@ Includes minimal package.el config for package archives
 #+end_src
 
 * Basics
+** Personal emacs-wide variables
+Also useful if I forget who I am
+#+begin_src emacs-lisp :tangle init.el
+  (setq user-full-name "Nina DePalma"
+        user-mail-address "ninadepalma@gmail.com"
+  	work-comp "WIN-HS95ZD3"
+  	home-comp "IDK-YET")
+
+#+end_src
+
 ** Look and feel
 #+begin_src emacs-lisp :tangle init.el
   (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
@@ -106,44 +116,48 @@ First mark the word, then add more cursors.
 To get out of multiple-cursors-mode, press <return> or C-g.
 The latter will first disable multiple regions before disabling multiple cursors. If you want to insert a newline in multiple-cursors-mode, use C-j.
 
-** Personal emacs-wide variables
-Also useful if I forget who I am
-#+begin_src emacs-lisp :tangle init.el
-  (setq user-full-name "Nina DePalma"
-        user-mail-address "ninadepalma@gmail.com")
-#+end_src
-
 * Theme
 #+begin_src emacs-lisp :tangle init.el
-  (load-theme 'tsdh-light)
 
-  (custom-set-faces
-   '(org-block-begin-line
-     ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
-   '(org-block
-     ((t (:background "#EFF0F1" :extend t))))
-   '(org-block-end-line
-     ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
-  )
+  (when (string= (system-name) work-comp)
+    (load-theme 'tsdh-light) ; i prefer light mode in the (bright) office (during the day)...
 
-  (set-face-attribute 'mode-line nil :background "SlateGray1")
-  (set-face-attribute 'mode-line-inactive nil :background "grey93")
+    (set-face-attribute 'mode-line nil :background "SlateGray1")
+    (set-face-attribute 'mode-line-inactive nil :background "grey93")
 
-    ;;;; below are my preferences for 'modus operandi tinted'
-    ;; (use-package modus-themes
-    ;;   :straight t
-    ;;   :config
+    (custom-set-faces
+     '(org-block-begin-line
+        ((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
+         '(org-block
+           ((t (:background "#EFF0F1" :extend t))))
+         '(org-block-end-line
+           ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
+     )
+    )
 
-    ;; (setq modus-themes-org-blocks 'gray-background) ; helps code blocks stand out
+  (when (string= (system-name) home-comp)
+    (load-theme 'tsdh-dark))  ; ...and dark mode at home
+    ;; preferences tbd...
 
-    ;; (setq modus-themes-common-palette-overrides
-    ;;       '((bg-mode-line-active bg-blue-intense) ; colorful mode line
-    ;;         (fg-mode-line-active fg-main)
-    ;;         (border-mode-line-active blue-intense)))
+#+end_src
 
-    ;; (load-theme 'modus-operandi t)
+Some unused theme preferences...
+#+begin_src emacs-lisp :tangle init.el
+  ;;;; below are my preferences for 'modus operandi tinted'
+  ;; (use-package modus-themes
+  ;;   :straight t
+  ;;   :config
 
-    ;; (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+  ;; (setq modus-themes-org-blocks 'gray-background) ; helps code blocks stand out
+
+  ;; (setq modus-themes-common-palette-overrides
+  ;;       '((bg-mode-line-active bg-blue-intense) ; colorful mode line
+  ;;         (fg-mode-line-active fg-main)
+  ;;         (border-mode-line-active blue-intense)))
+
+  ;; (load-theme 'modus-operandi t)
+
+  ;; (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
 #+end_src
 
 * Programming
@@ -337,3 +351,4 @@ Helm
 - [ ] writing setup
 - [ ] git gutter
 - [ ] all-the-icons?
+- [ ] ivy instead of helm
