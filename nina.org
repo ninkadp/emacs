@@ -48,7 +48,7 @@ Also useful if I forget who I am
   (setq user-full-name "Nina DePalma"
         user-mail-address "ninadepalma@gmail.com"
   	work-comp "WIN-HS95ZD3"
-  	home-comp "IDK-YET")
+  	home-comp "DESKTOP-HP02IG5")
 
 #+end_src
 
@@ -136,7 +136,7 @@ The latter will first disable multiple regions before disabling multiple cursors
            ((t (:background "#EFF0F1" :extend t))))
          '(org-block-end-line
            ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
-     )
+         )
     )
 
 #+end_src
@@ -145,10 +145,13 @@ The latter will first disable multiple regions before disabling multiple cursors
 #+begin_src emacs-lisp :tangle init.el
 
   (when (string= (system-name) home-comp)
-    (load-theme 'tsdh-dark))
-  ;; preferences tbd...
+    (straight-use-package 'color-theme-sanityinc-tomorrow)
+    (load-theme 'sanityinc-tomorrow-night t))
+
+  ;; org block preferences tbd...
 
 #+end_src
+
 
 ** unused theme preferences
 #+begin_src emacs-lisp :tangle init.el

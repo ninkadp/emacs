@@ -22,7 +22,7 @@
 (setq user-full-name "Nina DePalma"
       user-mail-address "ninadepalma@gmail.com"
 	work-comp "WIN-HS95ZD3"
-	home-comp "IDK-YET")
+	home-comp "DESKTOP-HP02IG5")
 
 (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
 (tool-bar-mode -1)   ; no tool bar with icons
@@ -84,12 +84,14 @@
          ((t (:background "#EFF0F1" :extend t))))
        '(org-block-end-line
          ((t (:overline "#A7A6AA" :foreground "#008ED1" :background "#EAEAFF" :extend t))))
-   )
+       )
   )
 
 (when (string= (system-name) home-comp)
-  (load-theme 'tsdh-dark))
-;; preferences tbd...
+  (straight-use-package 'color-theme-sanityinc-tomorrow)
+  (load-theme 'sanityinc-tomorrow-night t))
+
+;; org block preferences tbd...
 
 ;;;; below are my preferences for 'modus operandi tinted'
 ;; (use-package modus-themes
