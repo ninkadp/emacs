@@ -119,6 +119,40 @@ First mark the word, then add more cursors.
 To get out of multiple-cursors-mode, press <return> or C-g.
 The latter will first disable multiple regions before disabling multiple cursors. If you want to insert a newline in multiple-cursors-mode, use C-j.
 
+** neo tree
+#+begin_src emacs-lisp :tangle init.el
+  (use-package neotree
+    :straight t
+    :config
+    (setq neo-window-width 15
+          neo-autorefresh t
+          neo-create-file-auto-open t
+          neo-banner-message nil
+          neo-show-updir-line t
+          neo-window-fixed-size nil
+          neo-vc-integration nil
+          neo-mode-line-type 'neotree
+          neo-smart-open t
+          neo-show-hidden-files t
+          neo-mode-line-type 'none
+          neo-auto-indent-point t)
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+    (setq neo-hidden-regexp-list '("venv" "\\.pyc$" "~$" "\\.git" "__pycache__" ".DS_Store"))
+    (global-set-key (kbd "C-B") 'neotree-toggle))
+#+end_src
+
+** all-the-icons
+Must do M-x all-the-icons-install-fonts after
+#+begin_src emacs-lisp :tangle init.el
+  (use-package all-the-icons
+    :straight t
+    :if (display-graphic-p))
+
+    ;; Show icons in dired mode.
+  (straight-use-package 'all-the-icons-dired)
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+#+end_src
+
 * Theme
 ** I prefer light mode in the (bright) office...
 #+begin_src emacs-lisp :tangle init.el

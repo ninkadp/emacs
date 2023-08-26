@@ -71,6 +71,33 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+(use-package neotree
+  :straight t
+  :config
+  (setq neo-window-width 15
+        neo-autorefresh t
+        neo-create-file-auto-open t
+        neo-banner-message nil
+        neo-show-updir-line t
+        neo-window-fixed-size nil
+        neo-vc-integration nil
+        neo-mode-line-type 'neotree
+        neo-smart-open t
+        neo-show-hidden-files t
+        neo-mode-line-type 'none
+        neo-auto-indent-point t)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-hidden-regexp-list '("venv" "\\.pyc$" "~$" "\\.git" "__pycache__" ".DS_Store"))
+  (global-set-key (kbd "C-B") 'neotree-toggle))
+
+(use-package all-the-icons
+  :straight t
+  :if (display-graphic-p))
+
+  ;; Show icons in dired mode.
+(straight-use-package 'all-the-icons-dired)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
 (when (string= (system-name) work-comp)
   (load-theme 'tsdh-light)
 
