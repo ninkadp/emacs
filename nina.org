@@ -392,9 +392,11 @@ Helm
 - [X] tangle org config to multiple files
 - [X] see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
 - [X] different python-shell-interpreter for different computers
+- [X] neotree and all-the-icons
+- [ ] set better org block color for dark mode
+- [ ] ivy instead of helm
 - [ ] finish picking through R's config
 - [ ] numbers only in coding modes
 - [ ] writing setup
 - [ ] git gutter
 - [ ] all-the-icons?
-- [ ] ivy instead of helm
