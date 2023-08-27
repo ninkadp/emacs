@@ -74,7 +74,7 @@
 (use-package neotree
   :straight t
   :config
-  (setq neo-window-width 15
+  (setq neo-window-width 27
         neo-autorefresh t
         neo-create-file-auto-open t
         neo-banner-message nil
