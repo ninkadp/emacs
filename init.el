@@ -66,6 +66,9 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespaces
 
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backups"))))
+
 (setq default-directory "~/")
 (setq command-line-default-directory "~/")
 
@@ -81,7 +84,7 @@
 (use-package neotree
   :straight t
   :config
-  (setq neo-window-width 27g
+  (setq neo-window-width 27
         neo-autorefresh t
         neo-create-file-auto-open t
         neo-banner-message nil

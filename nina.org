@@ -100,6 +100,9 @@ Also useful if I forget who I am
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace) ; delete trailing whitespaces
 
+  (setq backup-directory-alist
+        `(("." . ,(concat user-emacs-directory "backups"))))
+
   (setq default-directory "~/")
   (setq command-line-default-directory "~/")
 #+end_src
@@ -131,7 +134,7 @@ The latter will first disable multiple regions before disabling multiple cursors
   (use-package neotree
     :straight t
     :config
-    (setq neo-window-width 27g
+    (setq neo-window-width 27
           neo-autorefresh t
           neo-create-file-auto-open t
           neo-banner-message nil
@@ -403,12 +406,10 @@ Helm
 - [X] tangle org config to multiple files
 - [X] see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
 - [X] different python-shell-interpreter for different computers
-- [ ] neotree and all-the-icons
-  - [ ] no line numberes in neotree
+- [X] neotree and all-the-icons
+  - [X] no line numberes in neotree
 - [ ] set better org block color for dark mode
 - [ ] ivy instead of helm
 - [ ] finish picking through R's config
-- [ ] numbers only in coding modes
 - [ ] writing setup
 - [ ] git gutter
-- [ ] all-the-icons?
