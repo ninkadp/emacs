@@ -34,14 +34,21 @@
 
 ;; smoother and nicer scrolling
 (setq scroll-margin 10
-   scroll-step 1
-   next-line-add-newlines nil
-   scroll-conservatively 10000
-   scroll-preserve-screen-position 1)
+      scroll-step 1
+      next-line-add-newlines nil
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
 
-;; relative line numbers
-(global-display-line-numbers-mode)
-(setq display-line-numbers-type 'relative)
+;; define how i want line/column numbers displayed in any modes of my choosing...
+(defun my-display-numbers-hook ()
+  (display-line-numbers-mode 1)
+  (column-number-mode 1)
+  )
+
+;; ...and set the modes of my choosing
+(add-hook 'prog-mode-hook 'my-display-numbers-hook)
+(add-hook 'org-mode-hook 'my-display-numbers-hook)
+
 
 (global-hi-lock-mode 1) ; highlights text that matches regular expressions
 (global-hl-line-mode 1) ; highlight current row
@@ -74,7 +81,7 @@
 (use-package neotree
   :straight t
   :config
-  (setq neo-window-width 27
+  (setq neo-window-width 27g
         neo-autorefresh t
         neo-create-file-auto-open t
         neo-banner-message nil
