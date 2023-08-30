@@ -408,8 +408,9 @@ Helm
 - [X] different python-shell-interpreter for different computers
 - [X] neotree and all-the-icons
   - [X] no line numberes in neotree
-- [ ] set better org block color for dark mode
+- [ ] lsp mode instead of elpy
 - [ ] ivy instead of helm
+- [ ] set better org block color for dark mode
 - [ ] finish picking through R's config
 - [ ] writing setup
 - [ ] git gutter
