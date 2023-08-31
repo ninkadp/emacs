@@ -81,33 +81,6 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-(use-package neotree
-  :straight t
-  :config
-  (setq neo-window-width 27
-        neo-autorefresh t
-        neo-create-file-auto-open t
-        neo-banner-message nil
-        neo-show-updir-line t
-        neo-window-fixed-size nil
-        neo-vc-integration nil
-        neo-mode-line-type 'neotree
-        neo-smart-open t
-        neo-show-hidden-files t
-        neo-mode-line-type 'none
-        neo-auto-indent-point t)
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq neo-hidden-regexp-list '("venv" "\\.pyc$" "~$" "\\.git" "__pycache__" ".DS_Store"))
-  (global-set-key (kbd "C-B") 'neotree-toggle))
-
-(use-package all-the-icons
-  :straight t
-  :if (display-graphic-p))
-
-  ;; Show icons in dired mode.
-(straight-use-package 'all-the-icons-dired)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-
 (when (string= (system-name) work-comp)
   (load-theme 'tsdh-light)
 
@@ -145,6 +118,106 @@
 ;; (load-theme 'modus-operandi t)
 
 ;; (define-key global-map (kbd "<f5>") #'modus-themes-toggle))
+
+(use-package neotree
+  :straight t
+  :config
+  (setq neo-window-width 27
+        neo-autorefresh t
+        neo-create-file-auto-open t
+        neo-banner-message nil
+        neo-show-updir-line t
+        neo-window-fixed-size nil
+        neo-vc-integration nil
+        neo-mode-line-type 'neotree
+        neo-smart-open t
+        neo-show-hidden-files t
+        neo-mode-line-type 'none
+        neo-auto-indent-point t)
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-hidden-regexp-list '("venv" "\\.pyc$" "~$" "\\.git" "__pycache__" ".DS_Store"))
+  (global-set-key (kbd "C-B") 'neotree-toggle))
+
+(use-package all-the-icons
+  :straight t
+  :if (display-graphic-p))
+
+;; Show icons in dired mode.
+(straight-use-package 'all-the-icons-dired)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+(use-package projectile
+  :straight t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode 1)
+  )
+
+;; integrate projectile with counsel
+(use-package counsel-projectile
+  :straight t
+  :config
+  (counsel-projectile-mode 1))
+
+;; use ivy in projectile
+(setq projectile-completion-system 'ivy)
+
+(use-package ivy
+  :diminish
+  :straight t
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t)
+
+  (setq ivy-re-builders-alist
+  	'((swiper . ivy--regex-plus)
+  	  (t      . ivy--regex-fuzzy)))   ;; enable fuzzy searching everywhere except for swiper
+
+  (global-set-key (kbd "C-c C-r") 'ivy-resume))
+
+;; add information to ivy buffers
+(use-package ivy-rich
+  :straight t
+  :after all-the-icons-ivy-rich
+  :init (ivy-rich-mode 1)
+  :config
+					;(ivy-rich-mode 1)
+  (setq ivy-rich-path-style 'abbrev ;; abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
+  	ivy-virtual-abbreviate 'abbrev
+  	)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
+;; add icons to info-rich ivy buffers
+(use-package all-the-icons-ivy-rich
+  :straight t
+  :after counsel-projectile
+  :init (all-the-icons-ivy-rich-mode 1))
+
+(use-package swiper
+  :straight t
+  :config
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key "\C-r" 'swiper))
+
+(use-package counsel
+  :straight t
+  :config
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file))
+
+(straight-use-package 'smex)  ;; show recent commands first with counsel-M-x
+(straight-use-package 'flx)   ;; enable fuzzy matching
+(straight-use-package 'avy)   ;; enable avy for quick navigation
+
+(use-package helm
+  :straight t
+  :diminish)
+
+(global-set-key (kbd "C-c h") 'helm-mini)
+
+(helm-mode 1)
 
 (use-package smartparens
   :straight t
@@ -250,13 +323,6 @@
 (straight-use-package 'go-translate)
 
 (setq gts-translate-list '(("en" "de") ("en" "hu") ("en" "ru")))
-
-(straight-use-package 'helm)
-
-(global-set-key (kbd "C-c h") 'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-
-(helm-mode 1)
 
 (straight-use-package 'nov)
 

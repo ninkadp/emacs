@@ -1,5 +1,5 @@
 ;; https://github.com/radian-software/straight.el#getting-started
-;; Users of Emacs versions >= 27 will want to add:
+;; Users of Emacs versions after 27 will want to add:
 
 (setq package-enable-at-startup nil)
 

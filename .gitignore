@@ -20,3 +20,6 @@
 /early-init.el~
 /#init.el#
 /backups/
+/projectile-bookmarks.eld
+/projectile.cache
+/smex-items
