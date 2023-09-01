@@ -238,15 +238,18 @@
 (when (string= (system-name) home-comp)
   (setq python-shell-interpreter "C:\\Users\\ninad\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"))
 
-  ;; Elpy is an extension for the Emacs text editor to work with Python projects
-  (use-package elpy
-    :straight t)
+;; Elpy is an extension for the Emacs text editor to work with Python projects
+(use-package elpy
+  :straight t)
 
-  (add-hook 'elpy-mode-hook (lambda ()
-  			      (add-hook 'before-save-hook
-  					'elpy-format-code nil t))) ; auto-format on close
+(add-hook 'elpy-mode-hook (lambda ()
+  			    (add-hook 'before-save-hook
+  				      'elpy-format-code nil t))) ; auto-format on close
 
-  (elpy-enable)
+(elpy-enable)
+
+;; shell to start in current buffer directory
+(setq elpy-shell-starting-directory 'current-directory) ;; default is 'project-root
 
 (use-package flycheck
   :straight t
@@ -313,10 +316,10 @@
 ;; automatically tangle files when saved; keeps init.el up to date
 ;; ty https://systemcrafters.net/emacs-from-scratch/configure-everything-with-org-babel/
 (defun org-babel-tangle-config ()
-(when (string-equal (buffer-file-name)
-                    (expand-file-name "~/.emacs.d/nina.org"))
-  (let ((org-confirm-babel-evaluate nil))
-    (org-babel-tangle))))
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name "~/.emacs.d/nina.org"))
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
 
