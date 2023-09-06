@@ -1,14 +1,14 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
-	(expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	(bootstrap-version 5))
+      (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
-	  (url-retrieve-synchronously
-	  "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	  'silent 'inhibit-cookies)
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
+	(url-retrieve-synchronously
+	"https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+	'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
 (load bootstrap-file nil 'nomessage))
 
 (straight-use-package 'use-package)
@@ -16,13 +16,13 @@
 
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			   ("org"   . "https://orgmode.org/elpa/")
-			   ("elpa"  . "https://elpa.gnu.org/packages/")))
+			 ("org"   . "https://orgmode.org/elpa/")
+			 ("elpa"  . "https://elpa.gnu.org/packages/")))
 
 (setq user-full-name "Nina DePalma"
       user-mail-address "ninadepalma@gmail.com"
-	work-comp "WIN-HS95ZD3"
-	home-comp "DESKTOP-HP02IG5")
+      work-comp "WIN-HS95ZD3"
+      home-comp "DESKTOP-HP02IG5")
 
 (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
 (tool-bar-mode -1)   ; no tool bar with icons
@@ -172,8 +172,8 @@
   (setq enable-recursive-minibuffers t)
 
   (setq ivy-re-builders-alist
-  	'((swiper . ivy--regex-plus)
-  	  (t      . ivy--regex-fuzzy)))   ;; enable fuzzy searching everywhere except for swiper
+      '((swiper . ivy--regex-plus)
+    	(t      . ivy--regex-fuzzy)))   ;; enable fuzzy searching everywhere except for swiper
 
   (global-set-key (kbd "C-c C-r") 'ivy-resume))
 
@@ -183,10 +183,10 @@
   :after all-the-icons-ivy-rich
   :init (ivy-rich-mode 1)
   :config
-					;(ivy-rich-mode 1)
+  				      ;(ivy-rich-mode 1)
   (setq ivy-rich-path-style 'abbrev ;; abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
-  	ivy-virtual-abbreviate 'abbrev
-  	)
+      ivy-virtual-abbreviate 'abbrev
+      )
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 ;; add icons to info-rich ivy buffers
@@ -238,35 +238,21 @@
 (when (string= (system-name) home-comp)
   (setq python-shell-interpreter "C:\\Users\\ninad\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"))
 
-;; Elpy is an extension for the Emacs text editor to work with Python projects
-(use-package elpy
-  :straight t)
-
-(add-hook 'elpy-mode-hook (lambda ()
-  			    (add-hook 'before-save-hook
-  				      'elpy-format-code nil t))) ; auto-format on close
-
-(elpy-enable)
-
-;; shell to start in current buffer directory
-(setq elpy-shell-starting-directory 'current-directory) ;; default is 'project-root
+(use-package pyvenv
+  :straight t
+  :config
+  (pyvenv-mode t))
 
 (use-package flycheck
   :straight t
   :init (global-flycheck-mode))
 
-(setq elpy-modules (quote (elpy-module-company ; select elpy modules we want (this disables flymake)
-			      elpy-module-eldoc
-			      elpy-module-pyvenv
-			      elpy-module-yasnippet
-			      elpy-module-sane-defaults)))
-
 (add-hook 'after-init-hook #'global-flycheck-mode) ; permanently enable syntax checking with Flycheck
 
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (setq flycheck-python-pylint-executable "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\pylint.exe")
-	    (setq flycheck-pylintrc (substitute-in-file-name "C:\\Users\\ndepalma\\.pylintrc"))))
+  	(lambda ()
+  	  (setq flycheck-python-pylint-executable "C:\\Users\\ndepalma\\AppData\\Local\\Programs\\Python\\Python310\\Scripts\\pylint.exe")
+  	  (setq flycheck-pylintrc (substitute-in-file-name "C:\\Users\\ndepalma\\.pylintrc"))))
 
 (straight-use-package 'yaml-mode)
 
@@ -295,7 +281,7 @@
 ;; global todo statuses
 (setq org-todo-keywords
      '((sequence "TODO" "IN-PROGRESS" "WAITING" "|" "DONE" "REMOVED")
-	 (sequence "DEV" "TEST" "PROD" "DONE"))) ; I use org for work
+       (sequence "DEV" "TEST" "PROD" "DONE"))) ; I use org for work
 
 (setq org-log-done t) ; log time when task marked done
 
@@ -306,12 +292,12 @@
 
 ;; capture templates
 (setq org-capture-templates
-	'(("t" "Todo" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
-	   "* TODO %?")
-	("l" "Todo with link" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
-	 "* TODO %?\n  %i\n %a\n")
-	  ("j" "Journal" entry (file+datetree "~/org/life/journal.org")
-	   "* %?\nEntered on %U\n  %i\n  %a")))
+      '(("t" "Todo" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
+  	 "* TODO %?")
+      ("l" "Todo with link" entry (file+headline "~/org/work/dash.org" "========================= Unsorted TODOs =========================")
+       "* TODO %?\n  %i\n %a\n")
+  	("j" "Journal" entry (file+datetree "~/org/life/journal.org")
+  	 "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;; automatically tangle files when saved; keeps init.el up to date
 ;; ty https://systemcrafters.net/emacs-from-scratch/configure-everything-with-org-babel/

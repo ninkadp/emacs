@@ -346,20 +346,12 @@ It reindents after every change
     (setq python-shell-interpreter "C:\\Users\\ninad\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"))
 #+end_src
 
-*** elpy
+*** pyvenv
 #+begin_src emacs-lisp :tangle init.el
-  ;; Elpy is an extension for the Emacs text editor to work with Python projects
-  (use-package elpy
-    :straight t)
-
-  (add-hook 'elpy-mode-hook (lambda ()
-    			    (add-hook 'before-save-hook
-    				      'elpy-format-code nil t))) ; auto-format on close
-
-  (elpy-enable)
-
-  ;; shell to start in current buffer directory
-  (setq elpy-shell-starting-directory 'current-directory) ;; default is 'project-root
+  (use-package pyvenv
+    :straight t
+    :config
+    (pyvenv-mode t))
 #+end_src
 
 *** flycheck
@@ -367,12 +359,6 @@ It reindents after every change
   (use-package flycheck
     :straight t
     :init (global-flycheck-mode))
-
-  (setq elpy-modules (quote (elpy-module-company ; select elpy modules we want (this disables flymake)
-			      elpy-module-eldoc
-			      elpy-module-pyvenv
-			      elpy-module-yasnippet
-			      elpy-module-sane-defaults)))
 
   (add-hook 'after-init-hook #'global-flycheck-mode) ; permanently enable syntax checking with Flycheck
 #+end_src
