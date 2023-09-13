@@ -504,6 +504,11 @@ download here: https://github.com/iaolo/iA-Fonts/tree/master
 #+end_src
 
 * next...
+- [ ] delight
+- [ ] lsp mode
+- [ ] set better org block color for dark mode
+- [ ] finish picking through R's config
+- [ ] git gutter
 - [X] tangle org config to multiple files
 - [X] see if I can remove 'custom' from this file (or tangle it to init.el and remove it from there)
 - [X] different python-shell-interpreter for different computers
@@ -511,9 +516,4 @@ download here: https://github.com/iaolo/iA-Fonts/tree/master
   - [X] no line numberes in neotree
 - [X] ivy instead of helm
 - [X] projectile
-- [ ] delight
-- [ ] lsp mode
-- [ ] set better org block color for dark mode
-- [ ] finish picking through R's config
-- [ ] writing setup
-- [ ] git gutter
+- [X] writing setup
