@@ -319,7 +319,7 @@
 (straight-use-package 'markdown-mode)
 (straight-use-package 'olivetti)
 (add-hook 'markdown-mode-hook (lambda ()
-				(buffer-face-set '(:family "iA Writer Duospace"))
+				(buffer-face-set '(:family "iA Writer Duo S"))
 				(setq line-spacing 0.5)
 				(olivetti-mode t)
 				(setq olivetti-style 'fancy)

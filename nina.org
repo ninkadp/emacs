@@ -458,12 +458,15 @@ I use org mode to keep a running task list for work
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
 #+end_src
+
 * markdown
+markdown mode using iA Writer Duospace font
+download here: https://github.com/iaolo/iA-Fonts/tree/master
 #+begin_src emacs-lisp :tangle init.el
   (straight-use-package 'markdown-mode)
   (straight-use-package 'olivetti)
   (add-hook 'markdown-mode-hook (lambda ()
-  				(buffer-face-set '(:family "iA Writer Duospace"))
+  				(buffer-face-set '(:family "iA Writer Duo S"))
   				(setq line-spacing 0.5)
   				(olivetti-mode t)
   				(setq olivetti-style 'fancy)
