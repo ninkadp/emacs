@@ -88,6 +88,14 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+(use-package move-text
+  :straight t
+  :config
+  (move-text-default-bindings))
+
+(global-set-key (kbd "M-u") 'upcase-dwim)   ;; Alt+u upcase
+(global-set-key (kbd "M-l") 'downcase-dwim) ;; Alt-l lowercase
+
 (when (string= (system-name) work-comp)
   (load-theme 'tsdh-light)
 

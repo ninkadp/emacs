@@ -136,6 +136,21 @@ First mark the word, then add more cursors.
 To get out of multiple-cursors-mode, press <return> or C-g.
 The latter will first disable multiple regions before disabling multiple cursors. If you want to insert a newline in multiple-cursors-mode, use C-j.
 
+** move-text
+move line(s) around
+#+begin_src emacs-lisp :tangle init.el
+  (use-package move-text
+    :straight t
+    :config
+    (move-text-default-bindings))
+#+end_src
+
+** upper/lowercase
+make a word or region uppercase or lowercase
+#+begin_src emacs-lisp :tangle init.el
+  (global-set-key (kbd "M-u") 'upcase-dwim)   ;; Alt+u upcase
+  (global-set-key (kbd "M-l") 'downcase-dwim) ;; Alt-l lowercase
+#+end_src
 * theme
 ** I prefer light mode in the (bright) office...
 #+begin_src emacs-lisp :tangle init.el
@@ -459,7 +474,8 @@ I use org mode to keep a running task list for work
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
 #+end_src
 
-* markdown
+* text editing
+** markdown
 markdown mode using iA Writer Duospace font
 download here: https://github.com/iaolo/iA-Fonts/tree/master
 #+begin_src emacs-lisp :tangle init.el
