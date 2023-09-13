@@ -90,7 +90,7 @@ Also useful if I forget who I am
     :straight t
     :config
     (rich-minority-mode 1)
-    (setf rm-whitelist ""))
+    (setf rm-blacklist ""))
 
 #+end_src
 
@@ -458,7 +458,18 @@ I use org mode to keep a running task list for work
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
 #+end_src
-
+* markdown
+#+begin_src emacs-lisp :tangle init.el
+  (straight-use-package 'markdown-mode)
+  (straight-use-package 'olivetti)
+  (add-hook 'markdown-mode-hook (lambda ()
+  				(buffer-face-set '(:family "iA Writer Duospace"))
+  				(setq line-spacing 0.5)
+  				(olivetti-mode t)
+  				(setq olivetti-style 'fancy)
+  				(olivetti-set-width 75)
+  				))
+#+end_src
 * go-translate
 #+begin_src emacs-lisp :tangle init.el
   (straight-use-package 'go-translate)

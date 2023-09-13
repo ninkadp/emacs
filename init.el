@@ -60,7 +60,7 @@
   :straight t
   :config
   (rich-minority-mode 1)
-  (setf rm-whitelist ""))
+  (setf rm-blacklist ""))
 
 (global-auto-revert-mode t)   ; update buffers automatically when underlying files are changed externally
 
@@ -315,6 +315,16 @@
       (org-babel-tangle))))
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'org-babel-tangle-config)))
+
+(straight-use-package 'markdown-mode)
+(straight-use-package 'olivetti)
+(add-hook 'markdown-mode-hook (lambda ()
+				(buffer-face-set '(:family "iA Writer Duospace"))
+				(setq line-spacing 0.5)
+				(olivetti-mode t)
+				(setq olivetti-style 'fancy)
+				(olivetti-set-width 75)
+				))
 
 (straight-use-package 'go-translate)
 
