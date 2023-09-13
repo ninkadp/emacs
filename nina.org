@@ -85,6 +85,13 @@ Also useful if I forget who I am
 
   (set-frame-font "Hack 9" nil t)
 
+  ;; hide minor modes
+  (use-package rich-minority
+    :straight t
+    :config
+    (rich-minority-mode 1)
+    (setf rm-whitelist ""))
+
 #+end_src
 
 ** Behavior
