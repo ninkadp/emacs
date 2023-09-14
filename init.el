@@ -101,6 +101,9 @@
 (global-set-key (kbd "M-u") 'upcase-dwim)   ;; Alt+u upcase
 (global-set-key (kbd "M-l") 'downcase-dwim) ;; Alt-l lowercase
 
+(straight-use-package 'which-key)
+(which-key-mode)
+
 (when (string= (system-name) work-comp)
   (load-theme 'tsdh-light)
 

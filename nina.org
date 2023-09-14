@@ -54,48 +54,48 @@ Also useful if I forget who I am
 
 ** look and feel
 #+begin_src emacs-lisp :tangle init.el
-    (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
-    (tool-bar-mode -1)   ; no tool bar with icons
-    (scroll-bar-mode -1) ; no scroll bars
+  (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
+  (tool-bar-mode -1)   ; no tool bar with icons
+  (scroll-bar-mode -1) ; no scroll bars
 
-    (add-to-list 'initial-frame-alist '(left . 1)) ; initial frame on left
-    (add-to-list 'default-frame-alist '(fullscreen . fullheight)) ; every frame full height
-    (add-to-list 'default-frame-alist '(width . 90)) ; 90 columns wide
+  (add-to-list 'initial-frame-alist '(left . 1)) ; initial frame on left
+  (add-to-list 'default-frame-alist '(fullscreen . fullheight)) ; every frame full height
+  (add-to-list 'default-frame-alist '(width . 90)) ; 90 columns wide
 
-    ;; smoother and nicer scrolling
-    (setq scroll-margin 10
-          scroll-step 1
-          next-line-add-newlines nil
-          scroll-conservatively 10000
-          scroll-preserve-screen-position 1)
+  ;; smoother and nicer scrolling
+  (setq scroll-margin 10
+        scroll-step 1
+        next-line-add-newlines nil
+        scroll-conservatively 10000
+        scroll-preserve-screen-position 1)
 
-    ;; define how i want line/column numbers displayed in any modes of my choosing...
-    (defun my-display-numbers-hook ()
-      (display-line-numbers-mode 1)
-      (column-number-mode 1)
-      )
+  ;; define how i want line/column numbers displayed in any modes of my choosing...
+  (defun my-display-numbers-hook ()
+    (display-line-numbers-mode 1)
+    (column-number-mode 1)
+    )
 
-    ;; ...and set the modes of my choosing
-    (add-hook 'prog-mode-hook 'my-display-numbers-hook)
-    (add-hook 'org-mode-hook 'my-display-numbers-hook)
+  ;; ...and set the modes of my choosing
+  (add-hook 'prog-mode-hook 'my-display-numbers-hook)
+  (add-hook 'org-mode-hook 'my-display-numbers-hook)
 
 
-    (global-hi-lock-mode 1) ; highlights text that matches regular expressions
-    (global-hl-line-mode 1) ; highlight current row
+  (global-hi-lock-mode 1) ; highlights text that matches regular expressions
+  (global-hl-line-mode 1) ; highlight current row
 
-    ;; fonts
-    (when (member "Hack" (font-family-list))
-      (set-face-attribute 'default nil :font "Hack 9")
-      (set-face-attribute 'fixed-pitch nil :font "Hack 9"))
-    (when (member "iA Writer Quattro S" (font-family-list))
-      (set-face-attribute 'variable-pitch nil :font "iA Writer Quattro S 10"))
+  ;; fonts
+  (when (member "Hack" (font-family-list))
+    (set-face-attribute 'default nil :font "Hack 9")
+    (set-face-attribute 'fixed-pitch nil :font "Hack 9"))
+  (when (member "iA Writer Quattro S" (font-family-list))
+    (set-face-attribute 'variable-pitch nil :font "iA Writer Quattro S 10"))
 
-    ;; hide minor modes
-    (use-package rich-minority
-      :straight t
-      :config
-      (rich-minority-mode 1)
-      (setf rm-blacklist ""))
+  ;; hide minor modes
+  (use-package rich-minority
+    :straight t
+    :config
+    (rich-minority-mode 1)
+    (setf rm-blacklist ""))
 
 #+end_src
 
@@ -140,7 +140,6 @@ When you want to add multiple cursors not based on continuous lines, but based o
 First mark the word, then add more cursors.
 To get out of multiple-cursors-mode, press <return> or C-g.
 The latter will first disable multiple regions before disabling multiple cursors. If you want to insert a newline in multiple-cursors-mode, use C-j.
-
 ** move-text
 move line(s) around
 #+begin_src emacs-lisp :tangle init.el
@@ -156,6 +155,13 @@ make a word or region uppercase or lowercase
   (global-set-key (kbd "M-u") 'upcase-dwim)   ;; Alt+u upcase
   (global-set-key (kbd "M-l") 'downcase-dwim) ;; Alt-l lowercase
 #+end_src
+
+** which-key
+#+begin_src emacs-lisp :tangle init.el
+  (straight-use-package 'which-key)
+  (which-key-mode)
+#+end_src
+
 * theme
 ** I prefer light mode in the (bright) office...
 #+begin_src emacs-lisp :tangle init.el
