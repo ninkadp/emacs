@@ -53,7 +53,12 @@
 (global-hi-lock-mode 1) ; highlights text that matches regular expressions
 (global-hl-line-mode 1) ; highlight current row
 
-(set-frame-font "Hack 9" nil t)
+;; fonts
+(when (member "Hack" (font-family-list))
+  (set-face-attribute 'default nil :font "Hack 9")
+  (set-face-attribute 'fixed-pitch nil :font "Hack 9"))
+(when (member "iA Writer Quattro S" (font-family-list))
+  (set-face-attribute 'variable-pitch nil :font "iA Writer Quattro S 10"))
 
 ;; hide minor modes
 (use-package rich-minority
@@ -327,7 +332,7 @@
 (straight-use-package 'markdown-mode)
 (straight-use-package 'olivetti)
 (add-hook 'markdown-mode-hook (lambda ()
-				(buffer-face-set '(:family "iA Writer Duo S"))
+				(variable-pitch-mode)
 				(setq line-spacing 0.5)
 				(olivetti-mode t)
 				(setq olivetti-style 'fancy)

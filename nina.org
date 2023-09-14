@@ -15,7 +15,7 @@ This file contains my emacs config in a *literate style* with org-babel-mode.
 
   (provide 'early-init)
 #+end_src
-* Package management
+* package management
 Use straight.el, but install use-package as well
 Includes minimal package.el config for package archives
 #+begin_src emacs-lisp :tangle init.el
@@ -41,8 +41,8 @@ Includes minimal package.el config for package archives
 			   ("elpa"  . "https://elpa.gnu.org/packages/")))
 #+end_src
 
-* Basics
-** Personal emacs-wide variables
+* basics
+** personal emacs-wide variables
 Also useful if I forget who I am
 #+begin_src emacs-lisp :tangle init.el
   (setq user-full-name "Nina DePalma"
@@ -52,49 +52,54 @@ Also useful if I forget who I am
 
 #+end_src
 
-** Look and feel
+** look and feel
 #+begin_src emacs-lisp :tangle init.el
-  (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
-  (tool-bar-mode -1)   ; no tool bar with icons
-  (scroll-bar-mode -1) ; no scroll bars
+    (customize-set-variable 'inhibit-startup-screen t) ; no splash screen on start
+    (tool-bar-mode -1)   ; no tool bar with icons
+    (scroll-bar-mode -1) ; no scroll bars
 
-  (add-to-list 'initial-frame-alist '(left . 1)) ; initial frame on left
-  (add-to-list 'default-frame-alist '(fullscreen . fullheight)) ; every frame full height
-  (add-to-list 'default-frame-alist '(width . 90)) ; 90 columns wide
+    (add-to-list 'initial-frame-alist '(left . 1)) ; initial frame on left
+    (add-to-list 'default-frame-alist '(fullscreen . fullheight)) ; every frame full height
+    (add-to-list 'default-frame-alist '(width . 90)) ; 90 columns wide
 
-  ;; smoother and nicer scrolling
-  (setq scroll-margin 10
-        scroll-step 1
-        next-line-add-newlines nil
-        scroll-conservatively 10000
-        scroll-preserve-screen-position 1)
+    ;; smoother and nicer scrolling
+    (setq scroll-margin 10
+          scroll-step 1
+          next-line-add-newlines nil
+          scroll-conservatively 10000
+          scroll-preserve-screen-position 1)
 
-  ;; define how i want line/column numbers displayed in any modes of my choosing...
-  (defun my-display-numbers-hook ()
-    (display-line-numbers-mode 1)
-    (column-number-mode 1)
-    )
+    ;; define how i want line/column numbers displayed in any modes of my choosing...
+    (defun my-display-numbers-hook ()
+      (display-line-numbers-mode 1)
+      (column-number-mode 1)
+      )
 
-  ;; ...and set the modes of my choosing
-  (add-hook 'prog-mode-hook 'my-display-numbers-hook)
-  (add-hook 'org-mode-hook 'my-display-numbers-hook)
+    ;; ...and set the modes of my choosing
+    (add-hook 'prog-mode-hook 'my-display-numbers-hook)
+    (add-hook 'org-mode-hook 'my-display-numbers-hook)
 
 
-  (global-hi-lock-mode 1) ; highlights text that matches regular expressions
-  (global-hl-line-mode 1) ; highlight current row
+    (global-hi-lock-mode 1) ; highlights text that matches regular expressions
+    (global-hl-line-mode 1) ; highlight current row
 
-  (set-frame-font "Hack 9" nil t)
+    ;; fonts
+    (when (member "Hack" (font-family-list))
+      (set-face-attribute 'default nil :font "Hack 9")
+      (set-face-attribute 'fixed-pitch nil :font "Hack 9"))
+    (when (member "iA Writer Quattro S" (font-family-list))
+      (set-face-attribute 'variable-pitch nil :font "iA Writer Quattro S 10"))
 
-  ;; hide minor modes
-  (use-package rich-minority
-    :straight t
-    :config
-    (rich-minority-mode 1)
-    (setf rm-blacklist ""))
+    ;; hide minor modes
+    (use-package rich-minority
+      :straight t
+      :config
+      (rich-minority-mode 1)
+      (setf rm-blacklist ""))
 
 #+end_src
 
-** Behavior
+** behavior
 #+begin_src emacs-lisp :tangle init.el
   (global-auto-revert-mode t)   ; update buffers automatically when underlying files are changed externally
 
@@ -238,7 +243,7 @@ Must do M-x all-the-icons-install-fonts after
   (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 #+end_src
 
-* Project management
+* project management
 ** projectile
 #+begin_src emacs-lisp :tangle init.el
   (use-package projectile
@@ -334,7 +339,7 @@ keeping helm for helm mini for now
   (helm-mode 1)
 #+end_src
 
-* Programming
+* programming
 ** Parentheses
 
 #+begin_src emacs-lisp :tangle init.el
@@ -416,7 +421,7 @@ From the docs:
      ("C-c C-p"   . 'magit-push)))
 #+end_src
 
-* Org mode
+* org mode
 I use org mode to keep a running task list for work
 #+begin_src emacs-lisp :tangle init.el
     (use-package org
@@ -482,7 +487,7 @@ download here: https://github.com/iaolo/iA-Fonts/tree/master
   (straight-use-package 'markdown-mode)
   (straight-use-package 'olivetti)
   (add-hook 'markdown-mode-hook (lambda ()
-  				(buffer-face-set '(:family "iA Writer Duo S"))
+  				(variable-pitch-mode)
   				(setq line-spacing 0.5)
   				(olivetti-mode t)
   				(setq olivetti-style 'fancy)
